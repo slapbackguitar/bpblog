@@ -1,0 +1,659 @@
+<HTML>
+<HEAD>
+<TITLE>BP Blog Documentation</TITLE>
+</HEAD>
+
+<BODY>
+<h1>BP Blog</h1>
+<ul>
+  <li><a href="#changelog">CHANGELOG</a></li>
+  <li><a href="#documentation">DOCUMENTATION</a></li>
+  <li><a href="#faq">FAQ</a></li>
+  <li><a href="#mysql">MySQL Instructions</a></li>
+</ul>
+<h2><strong>CHANGELOG  </strong><a name="changelog"></a></h2>
+<p>v10.0 [2010-07-10]<BR>
++ Editor changed to ckeditor<br>
++ <a href="http://forum.slapbackguitar.com/index.php/topic,77.msg188.html#msg188">Layout tab</a> - thanks <a href="http://www.phillipecw.com/">Phillipe</a>!<br>
++ <a href="http://forum.slapbackguitar.com/index.php/topic,76.msg183.html#msg183">Entries search</a> by title or content - thanks <a href="http://www.phillipecw.com/">Phillipe</a>!<br>
++ Additional admin styles - copy Symbol-*.png files into images folder
+<br>
++ Enhanced admin <a href="http://www.position-absolute.com/articles/jquery-form-validator-because-form-validation-is-a-mess/">form validation</a><br>
+* Enhanced the <a href="http://forum.slapbackguitar.com/index.php/topic,56.msg136.html#msg136">crop sentence routine</a><br>
+* Adding <a href="http://forum.slapbackguitar.com/index.php/topic,78.msg207.html#msg207">one new line of encoding</a> to rss.asp<br>
+* Fixed <a href="http://forum.slapbackguitar.com/index.php/topic,29.msg175.html#msg175">CSS problem</a> with andrea theme <br>
+* Removed version numbers from public pages<br>
+# <a href="http://forum.slapbackguitar.com/index.php/topic,73.msg178.html#msg178">Manually add pagination </a>using the layout tab<br>
+  v9.0.1 [2009-09-03]<BR>
+  + Updated fckeditor to version 2.6.4.1<br>
+  v9.0 [2008-09-16]<BR>
+  * Fixed problem where layout was broken<br>
+  * CSS colors and layout changes in the admin<br>
+  + More admin screen validations
+  <br>
+  + New layout engine (no more using the tblLayout option). Layouts are in the Themes folder and are chosen on the Config screen.<br>
++ Layout previews are now stored in a session variable to you can preview all pages in your theme<br>
+ + Gallery config screen for thumbnail sizes added <br>
+ + Updated fckeditor to version 2.6.3<br>
+  v8.0.5 [2008-06-15]<BR>
+  + Manually add a "More..." link   anywhere in your post by putting in the tag [more] <BR>
+  v8.0.4 [2008-02-27]<BR>
+  *   Fixed typo on Approve Comments admin page<BR>
+  +   Added reload captcha image link on template_permalink.asp<BR>
+  v8.0.3   [2008-02-18]<BR>
+  + Updated fckeditor to version 2.5.1<BR>
+  v8.0.2 [2007-10-20]<BR>
+  *   Fixed login fail redirect on login.asp (it was redirecting to   admin_default.asp)<BR>
+  * Deleted some duplicate code in login.asp<BR>
+  v8.0.1   [2007-09-09]<BR>
+  * Updated archives.asp and archives_cat.asp to use the new   plugin engine.<BR>
+  v8.0 [2007-08-23]<BR>
+  + When logged in as an admin you have two   views, the admin view and a user view based on your UserID.&nbsp; <BR>
+  You can see   everything or just your content if you're an admin.<BR>
+  + Added fldAdmin (Default   0, 1 for Admin) in tblUser, Required<BR>
+  + Added fldGalleryUser in tblGallery,   Required, galleries are now tied to UserID<BR>
+  + Admin interface now uses   "Updated Simple CSS Tabs" <BR>
+  Ref: <A href="http://labs.silverorange.com/archives/2004/may/updatedsimple" rel="nofollow">http://labs.silverorange.com/archives/2004/may/updatedsimple</A><BR>
+  +   Error checking on all admin pages<BR>
+  + Users can update their profile from their   online profile page is logged in<BR>
+  + Users and Admin can edit posts from the   permalink page if logged in<BR>
+  + Plugin Module<BR>
+  * Updated fckeditor to newest   version 2.4.3<BR>
+  * Cleaned up gallery code<BR>
+  * Created function lib for common   code in blog.asp rather than on individual pages<BR>
+  * Changed the   admin_default.asp page to login.asp<BR>
+  * Blog titles are now all permalinks on   the public pages<BR>
+  * Deleting a blog entry now deletes the associated Comments   also<BR>
+  - Removed no897 template (didn't work)TODO: Create SQL script to alter   existing db tables. Added fields:<BR>
+  + On tblAuthor - [fldAdmin] [smallint] NULL   DEFAULT ((0))<BR>
+  + On tblGallery - [fldGalleryUser] [int] NOT NULL DEFAULT   ((1))DB Upgrade Notes:<BR>
+  Add the two above fields and then run the following   queries:<BR>
+  -----<BR>
+  Update tblAuthor<BR>
+  Set fldAdmin = 1<BR>
+  -----<BR>
+  This will   set all of your Author's to admins which you can change via the admin   screen<BR>
+  -----<BR>
+  Update tblGallery<BR>
+  Set fldGalleryUser = 1<BR>
+  -----<BR>
+  This   will set all of your existing galleries to have been created by you.&nbsp; Change the   1 to your UserID.Notes:<BR>
+  Option Explicit commented   out<BR>
+  FCKeditor\editor\filemanager\browser\default\connectors\asp\connector.asp<BR>
+  FCKeditor\editor\filemanager\upload\asp\upload.asp<BR>
+  ----------------------------------------<BR>
+  v7.04.01   [2007-07-12]<BR>
+  * Updated MakeHyperlink function on   template_permalink.asp<BR>
+  Ref: Thanks Nate <A href="http://blog.betaparticle.com/forum/topic.asp?TOPIC_ID=199" rel="nofollow">http://blog.betaparticle.com/forum/topic.asp?TOPIC_ID=199</A><BR>
+  *   Updated readme.htm file to redirect to wiki<BR>
+  + Added some default entries in   the blog.sql script for tblLayout<BR>
+  Ref: h<A href="http://blog.betaparticle.com/forum/topic.asp?TOPIC_ID=202" rel="nofollow">ttp://blog.betaparticle.com/forum/topic.asp?TOPIC_ID=202</A><BR>
+  v7.04   [2007-04-27]<BR>
+  + Added IsValidString and HackerSafe_Filter to check for   possible SQL injection and remove database code from erroneous urls<BR>
+  Files   changed:   default.asp<BR>
+  search.asp<BR>
+  template.asp<BR>
+  template_archives.asp<BR>
+  template_archives_cat.asp<BR>
+  template_author.asp<BR>
+  template_gallery_detail.asp<BR>
+  template_permalink.asp<BR>
+  These   are all above the first HTML tag, if you're updating these manually<BR>
+  * Updated   fckeditor to newest version 2.4.2<BR>
+  v7.03 [2007-03-15]<BR>
+  * Fixed default.asp   layout typo vulnerability <BR>
+  * Optimized SELECT * statements to explicit table   names for faster page generation <BR>
+  * Fixed a bug where draft page would show   up in sidebar and recent items <BR>
+  v7.02 [2007-02-24]<BR>
+  * Fixed register.asp   security vulnerability <BR>
+  * Removed &lt;![CDATA[ from XML generation after   cleaning up rss.asp <BR>
+  v7.01 [2006-11-10]<BR>
+  * Updated fckeditor to version   2.3.2<BR>
+  * Fixed a tiny bug in the description meta tag on   template_permalink.asp where some HTML tags weren't being filtered out <BR>
+  v7.0   [2006-11-05]<BR>
+  + Added multiple templating via the database with previews   (selectable from the config screen) <BR>
+  + Added an author page with rich text   description <BR>
+  + Added registration page with "Approved" flag for admin (you   must create a new page called "thankyou", example) <BR>
+  + Added search highlight   (hl class in the stylesheet) <BR>
+  + Send login details via an email link (Must be   Plain Text)<BR>
+  + Added Archive by Month and Archive by Category pages <BR>
+  +   Added "Read More" flag in post (default length is 500 characters) <BR>
+  + Added   Draft flag in post<BR>
+  + Added Comment Numbers and an alt class for each   alternate row (commentalt. css class) <BR>
+  + Added "Edit" link on each permalink   and page post if you're logged in for quick and easy updating if a typing error   is found <BR>
+  + Lightbox code is on by default for the galleryIf you don't want   lightbox, then just remove the following lines from Layout2 of the default   layout (via the new admin screen):&lt;link rel="stylesheet"   href="css/lightbox.css" type="text/css" media="screen" /&gt;<BR>
+&lt;script   src="js/prototype.js" type="text/javascript"&gt;&lt;/script&gt;<BR>
+&lt;script   src="js/scriptaculous.js?load=effects"   type="text/javascript"&gt;&lt;/script&gt;<BR>
+&lt;script src="js/lightbox.js"   type="text/javascript"&gt;&lt;/script&gt; <BR>
+* Updated the RSS Feed to 2.0 <BR>
+* Fixed gallery delete folder error <BR>
+* Fixed empty category dead link   problem <BR>
+* Fixed a search bug where the category was incorrect <BR>
+* Cleaned   up code <BR>
+Database changes: tblRSS <BR>
+blogLayout int required default 1 <BR>
+tblLayout <BR>
+layoutid autonumber pk <BR>
+layout1 memo <BR>
+layout2 memo <BR>
+layout3 memo <BR>
+layout4 memo <BR>
+layout5 memo <BR>
+layoutTitle Text 100 char <BR>
+tblBlog <BR>
+BlogReadMore int required default 0 <BR>
+BlogDraft int required   default 0 <BR>
+----------------------------------------<BR>
+v6.04   [2006-04-29]<BR>
++ Implemented ASP Security Image Generator (CAPTCHA) <A href="http://www.tipstricks.org/" rel="nofollow">http://www.tipstricks.org/</A><BR>
++ Added link to original post in   comment approval page <BR>
+* Deleted comment code from   template_permalink.asp<BR>
+v6.03 [2006-03-21]<BR>
+* Secured all fckeditor asp   files using an include check for session login<BR>
+v6.02 [2006-03-18]<BR>
+* Fixed   a hack exploit on pages that accepted a parameter by checking if the length of   the param was less than 5<BR>
+v6.01 [2006-02-02]<BR>
+* Fixed a bug where the 31st   day post was not appearing on the template_archives.asp page for the   Month<BR>
+v6.0 [2006-01-07]<BR>
++ Added the ability to set the number of posts to   show on default via the configuration screen<BR>
+* Change commenting database   field to type number (int)<BR>
+* Altered code to work with SQL   Server<BR>
+----------------------------------------<BR>
+v5.01b [2005-07-30]<BR>
++   Added the ability to edit comments<BR>
++ HTML/RSS publishing is now done visually   from their respective pages and the results are displayed and timed<BR>
+* Updated   meta info and CC licence code<BR>
+v5.0b [2005-07-07]<BR>
++ Changed the default   template to a blogger style<BR>
++ Each area that requires changing for templates   has been converted to a Library item (DW object) for easier customization<BR>
++   The Editor has been updated to KTML Pro v3.5.6<BR>
+* No more need for inputting   the correct blog url for publishing - it's detected automatically (note: you'll   still have to have it correct in the config for your RSS feed file which pulls   from this)<BR>
+* Fixed numerous   errors<BR>
+----------------------------------------<BR>
+v4.06 [2005-05-04]<BR>
++   Disabled the ability to delete the admin user account<BR>
++ Entries can now be   ordered by Category (everyone) and by Author (if you're logged in as admin)<BR>
+*   Fixed comments display in Ascending order rather than in Descending order   (newest comments at the bottom)<BR>
+* Fixed admin page errors<BR>
+v4.05   [2005-05-02]<BR>
++ Entries can now by ordered by Date and Heading, Ascending or   Descending<BR>
++ Pending Comments count<BR>
++ Text guess on the Blog Configuration   page to help with paths (very important - the blog software won't work if this   field is wrong)<BR>
+* Changed the login page so that the admin navigation doesn't   show<BR>
+* Simplified the download so that only one download is required for root   or subdirectory installations<BR>
+* Fixed typos<BR>
+* Fixed several errors with   the Gallery admin pages regarding deleting images<BR>
+v4.04 [2005-04-26]<BR>
++   Meta tag "description" field now on each page and pulls from your configuration   screen description<BR>
++ RSS generator now adds "pubDate" for each post and   "lastBuildDate" for your site in RFC822 format<BR>
++ Added bp blog download for   root installations (e.g., <A href="http://blogname.com/" rel="nofollow">http://blogname.com/</A>)<BR>
+* Fixed several typos<BR>
+v4.03   [2005-04-20]<BR>
++ Added ability to delete comments from each blog entry on that   entry's update page.<BR>
+v4.02 [2005-04-19]<BR>
+* Fixed the gallery upload feature   - no longer requires a server component.<BR>
+* Changed the gallery files to 1   upload (rather than 3).<BR>
+v4.01 [2005-04-13]<BR>
+* Fixed the gallery files to   work regardless of directory structure<BR>
+* Fixed numerous issues with the ASP   only templates.<BR>
+v4.0 [2005-03-21]<BR>
++ Multiple authors supported (username   "admin" has access to all posts)<BR>
++ Commenting can be turned on or off for   each entry<BR>
++ Simple Gallery (requires Persits ASP Upload and .NET for   thumbnail resizing)<BR>
++ Added Templates Directory with option for ASP (for   those who can't get the publish to HTML option to work) and Movable Type<BR>
+* DB   Changes:<BR>
+- Added tblAuthor table and linked it to the BlogAuthor field in   tblBlog<BR>
+- Changed commentDate in tblComment to Long Date format<BR>
+- Added   BlogCommentInclude field to tblBlog<BR>
+---------------------------------------- <BR>
+v3.1 [2005-03-09]<BR>
++ Update HTML Editor to KTML 3.5.6 <A href="http://www.interaktonline.com/Products/KTML/Overview/" rel="nofollow">http://www.interaktonline.com/Products/KTML/Overview/</A><BR>
+v3.02   [2005-03-09]<BR>
++ Added Comments and Category Counts<BR>
+* Fixed zip download   with correct mdb file<BR>
+v3.01 [2005-02-07]<BR>
++ Added Search function that   strips the HTML from the results and truncates the line to 300 characters<BR>
+*   Fixed numberous formatting problems concerning anchors and the rss.asp generator   to conform to the new layout.</p>
+<h2>Documentation <a name="documentation" id="documentation"></a></h2>
+<p> Synopsis<BR>
+  License<BR>
+  Donation<BR>
+  Download<BR>
+  Features<BR>
+  Important   Note<BR>
+  Installation<BR>
+  Installation Procedure <BR>
+  Requirements<BR>
+  Server<BR>
+  Browser<BR>
+  Database<BR>
+  Changelog<BR>
+  Sites Using BP   Blog<BR>
+  Additional Help<BR>
+Screenshots</p>
+<h3> Synopsis</h3>
+<p> BP Blog is a blog software coded in ASP.</p>
+<h3> License</h3>
+<p> Creative Commons License <A href="http://creativecommons.org/licenses/by-nc-sa/2.5/" rel="nofollow">http://creativecommons.org/licenses/by-nc-sa/2.5/</A></p>
+<h3>  Donation</h3>
+<p>
+  <input type="hidden" name="cmd" value="_s-xclick" />
+  <input type="image" alt="Make payments with PayPal - it's fast, free and secure!" src="https://www.paypal.com/en_US/i/btn/x-click-but21.gif" border="0" name="submit2" />
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+                " />
+</p>
+<p>  Cost   (Suggested): $20.00 US Dollars<BR>
+  Benefits: <BR>
+  * Assist in further development   of BP Blog <BR>
+* Personal Email Support</p>
+<h3> Download</h3>
+<p> <A href="http://blog.betaparticle.com/uploads/blog_9.0.zip" rel="nofollow">http://blog.betaparticle.com/uploads/blog_9.0.zip</A></p>
+<h3>  Features</h3>
+<p> *   ASP 3.0 <BR>
+  * HTML Editor with image/file upload <BR>
+  * Only one line of code to   change (the connection string to your Access database)! <BR>
+  * Simple Gallery   (requires ASP.NET for thumbnail creation) <BR>
+* Plugin Module</p>
+<h3> Important   Note</h3>
+<p> The default username and password is:<BR>
+  <BR>
+  Username: admin <br>
+  Password:   password<BR>
+  <BR>
+Be sure and change these when you login for the first time! </p>
+<h3> Installation</h3>
+<p> I decided against using an email client to notify your users   if they have been approved after registering due to server variance. On the   user's page you can send the users their login information and tell them they're   approved for posting. The sidebar hides the admin functions. <BR>
+  <BR>
+Their is   only one admin with the username "admin" since this blog was originally designed   to be for one site with many users, not a multi-blog application. This may be in   the future... </p>
+<h3> Installation Procedure </h3>
+<p> 1. Upload all files to the   directory of your choice on your web server. If using the provided Access   database, 2.1 Open "blog.asp" in the Connections folder and change the path to   you database (in the "Data Source=" area) If SQL Server, 2.2 Open blog.sql in   the Connections folder and run on your SQL Server to create your database and   default entries 3. Open up blog.asp in the Connections folder and change the   variables: Dim theBasePath theBasePath = "/FCKeditor/" 'FCKeditor base path Dim   theConfigUserFilesPath theConfigUserFilesPath = "/UserFiles/"<BR>
+  <BR>
+  The   connection string will probably be the most difficult step in the process,   especially concerning SQL Server.<BR>
+  <BR>
+  4. Open up the admin page <A href="http://yourserver.com/main.asp" rel="nofollow">http://yourserver.com/main.asp</A> or the login page <A href="http://yourserver.com/admin_login.asp." rel="nofollow">http://yourserver.com/admin_login.asp.</A> The default username is   "admin" and the password is "password"<BR>
+  <BR>
+  5. The first thing to do after   logging in is to click "Users" on the sidebar and change the admin password.   Then click "Blog Configuration" and fill in the appropriate information. There   is some help if you put your mouse over each field title. <BR>
+  <BR>
+  6. There is a   layout.htm document to give you the basics of the templating system that's   stored in the database by viewing the source of the document and looking at the   HTML comments. There are 5 layout parts that divide the page - what I call the   "wrapper" b/c it's the layout that wraps around the dynamic text elements and   generally stays the same on each page.<BR>
+  <BR>
+  7. If you need to customize the   dynamic elements such as the post area then you'll have to manually edit (the   area that's not covered by the templates) in notepad or Dreamweaver: <BR>
+  *   default.asp <BR>
+  * search.asp <BR>
+  * template.asp <BR>
+  * template_archives.asp <BR>
+  * template_archives_cat.asp <BR>
+  * template_author.asp <BR>
+  *   template_gallery.asp <BR>
+  * template_gallery_detail.asp <BR>
+*   template_permalink.asp</p>
+<h3> Requirements</h3>
+<h4> Server</h4>
+<p> * IIS 4.0+ <BR>
+  * Read/write   access on the server (FSO) <BR>
+  * MSXML <BR>
+* Simple Gallery requires ASP.NET 1.1   or greater for thumbnail creation</p>
+<h4> Browser</h4>
+<p> IE 5.0+ or Firefox 1.0+ </p>
+<h4> Database</h4>
+<p> Access or SQL Server or MySQL (BETA) </p>
+<h2>FAQ <a name="faq" id="documentation2"></a></h2>
+<p><strong>More info: <A href="http://www.google.com/search?num=50&hl=en&q=site%3Abetaparticle.com+%22bp+blog%22" rel="nofollow">Google</A></strong><BR>
+  <BR>
+  <strong>Generic HTTP 500 - Internal server   errors</strong><BR>
+  A Frequent problem when trying to run ASP applications on your own   web space or web server is how do you debug the application if it is not running   correctly and only showing a generic error message. <BR>
+  <BR>
+  All to often in   Internet Explorer if the application crashes all you see is a page saying - 'The   page cannot be displayed.' then further down the screen you have the generic   error 'HTTP 500 - Internal server error'.<BR>
+  <BR>
+  Well you'll be glad to know   there is something you can do to help debug the application and find out what   exactly is coursing the application not to run correctly.<BR>
+  <BR>
+  To do this you   need to turn of Internet Explorers, Friendly HTTP Error Messages function, by   following the steps below: -<BR>
+  <BR>
+  First you need to select 'Tools' from the   menu at the top of Internet Explorer.<BR>
+  Then from the drop down menu choose   'Internet Options'.<BR>
+  Once the 'Internet Options' Dialog box opens you want to   choose the 'Advanced' tab.<BR>
+  You will then see a list of Advanced functions of   Internet Explorer that can be turned on or off by checking the tick   boxes.<BR>
+  Look down the list for 'Show friendly HTTP error messages' and uncheck   the tick box for it followed by the 'Apply' button at the bottom of the dialog   box.<BR>
+  Now when you return to the main Internet Explorer screen with 'The page   cannot be displayed. - HTTP 500 - Internal server error' you should be able to   get what the error is after hitting the refresh button.<BR>
+  <BR>
+  Ref: <A href="http://www.webwizguide.info/asp/faq/friendly_HTTP_error_messages.asp" rel="nofollow">http://www.webwizguide.info/asp/faq/friendly_HTTP_error_messages.asp</A><BR>
+  <BR>
+  <strong>fckeditor   not showing</strong><BR>
+  In Connections/ blog.asp <BR>
+  Dim theBasePath theBasePath =   "/FCKeditor/" Dim theConfigUserFilesPath theConfigUserFilesPath =   "/UserFiles/"<BR>
+  <BR>
+  You can comment out the dim statements if you have   additional problems like: 'Dim theBasePath theBasePath = "/FCKeditor/" 'Dim   theConfigUserFilesPath theConfigUserFilesPath = "/UserFiles/"<BR>
+  <BR>
+  If the path   to your blog is <A href="http://domain.com/blog/" rel="nofollow">http://domain.com/blog/</A> then change the above to: 'Dim   theBasePath theBasePath = "/blog/FCKeditor/" 'Dim theConfigUserFilesPath   theConfigUserFilesPath = "/blog/UserFiles/"<BR>
+  <BR>
+  You may also try it without   the leading slash: 'Dim theBasePath theBasePath = "FCKeditor/" 'Dim   theConfigUserFilesPath theConfigUserFilesPath = "UserFiles/" <BR>
+  <BR>
+  <strong>Thumbnails won't display on gallery pages</strong><BR>
+  <BR>
+  You must   have asp.net enabled for thumbnails to display. If this is not possible, then   delete the code:<BR>
+  thumbnailimage.aspx?filename=<BR>
+  <BR>
+  from   template_gallery.asp and template_gallery_detail.asp and the pages should   display without thumbnailing.<BR>
+  <BR>
+  <strong>Name redefined error</strong><BR>
+  If the pages   that use fckeditor get the error: <BR>
+  Microsoft VBScript compilation error   '800a0411' Name redefined /blog/Connections/blog.asp, line 8 Dim MM_blog_STRING   ----^<BR>
+  <BR>
+  Then comment out the Dim statements in your blog.asp file (they're   not really needed) like so:<BR>
+  'Dim MM_blog_STRING MM_blog_STRING =   "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\blog.mdb;Persist Security   Info=False" 'Dim theBasePath theBasePath = "/blog/FCKeditor/" 'FCKeditor base   path 'Dim theConfigUserFilesPath<BR>
+  <BR>
+  <strong>Disallowed Path Characters/Disallowed   Parent Path</strong><BR>
+  Problem:<BR>
+  Server.MapPath() error 'ASP 0175 :   80004005'<BR>
+  <BR>
+  Disallowed Path Characters The '..' characters are not allowed   in the Path parameter for the MapPath method.<BR>
+  <BR>
+  OR<BR>
+  The Include file   '../Connections/blog.asp' cannot contain '..' to indicate the parent directory. <BR>
+  <BR>
+  Solution:<BR>
+  <BR>
+  "Enable parent paths" setting must be enabled on your   IIS server. You might need to talk to your server admin concerning this. They'll   know what you're talking about.<BR>
+  <BR>
+  More info: <A href="http://www.google.com/search?num=100&hl=en&lr=&safe=active&q=Disallowed" rel="nofollow">http://www.google.com/search?num=100&amp;hl=en&amp;lr=&amp;safe=active&amp;q=Disallowed</A>+Path+Characters+IIS<BR>
+  <BR>
+  By   default, the Parent Paths option is enabled in IIS 5.0, but it is disabled by   default in IIS 6.0. <BR>
+  <BR>
+  1. Click Start, click Administrative Tools, and then   click Internet Information Services (IIS) Manager. <BR>
+  2. Double-click your   computer name in the left pane, and then double-click Web Sites. <BR>
+  3. Locate   the Web site and directory that houses the ASP application. <BR>
+  4. Right-click   the application site or directory, and then click Properties. <BR>
+  5. Select Home   Directory, and then click Configuration. <BR>
+  6. Click Options, and then click to   select the Enable Parent Paths check box. <BR>
+  7. Click OK two times. <BR>
+  <BR>
+Ref: <A href="http://support.microsoft.com/kb/332117" rel="nofollow">http://support.microsoft.com/kb/332117</A></p>
+<p>  <strong>Permission denied   error</strong></p>
+<p> Your blog directory must have read/write permissions:</p>
+<ul>
+  <LI>right click on file/directory   
+  <LI>click on properties   
+  <LI>navigate to security tab   
+  <LI>click on add   
+  <LI>click on advanced   
+  <LI>click on "find now"   
+  <LI>click on IUSR user   
+  <LI>give appropriate permissions <EM>(modify, read, write)</EM>
+  <LI>Click on Apply and exit (by clicking ok)</LI>
+</ul>
+<p> <strong>SQL   Server</strong><BR>
+  ADODB Field error 800a0bcd<BR>
+  After installing on SQL Server.   tblLayout must have some default entries in it. I just use "asdf" for each   field. Fixed with version 7.04.01. <BR>
+</p>
+<h2> MySQL Instructions <a name="mysql" id="documentation3"></a></h2>
+ <p> First export your   database using this app: MdbToMySQL<BR>
+   <A href="http://www.zebradb.de/mdbtomysql.htm" rel="nofollow">http://www.zebradb.de/mdbtomysql.htm</A><BR>
+   <BR>
+   Then use this .sql   script to import.<BR>
+   <BR>
+   3 areas in your generated script have to be altered to   work with MySQL: tblBlog, tblComment, tblGallery and tblPage. Set them all to   this definition:<BR>
+   <BR>
+   In tblBlog: <BR>
+   <BR>
+   BlogDate timestamp NOT NULL default   CURRENT_TIMESTAMP&nbsp; <BR>
+   <BR>
+   <BR>
+   In tblComment: commentDate timestamp NOT NULL   default CURRENT_TIMESTAMP&nbsp; <BR>
+   <BR>
+   <BR>
+   In tblGallery: fldGalleryCreated   timestamp NOT NULL default CURRENT_TIMESTAMP&nbsp; <BR>
+   <BR>
+   <BR>
+   and the insert   statement:<BR>
+   <BR>
+   INSERT INTO tblGalleryConfig (fldGalleryConfigID,   fldGalleryTitleThumb, fldGalleryThumb) VALUES (1, 425, 150);&nbsp; <BR>
+   <BR>
+   <BR>
+   In   tblPage: PageDate timestamp NOT NULL default CURRENT_TIMESTAMP&nbsp; <BR>
+   <BR>
+   <BR>
+   You'll have to search around the .sql file but it's not that   difficult.<BR>
+   <BR>
+   Replace your connection string with: <BR>
+   db_server =   "10.6.166.52"&nbsp; <BR>
+   db_name = "dbname"&nbsp; <BR>
+   db_username = "dbname"&nbsp; <BR>
+   db_userpassword = "dbpass"&nbsp; <BR>
+   MM_blog_STRING = "Driver={MySQL ODBC 3.51   Driver};SERVER=" &amp; db_server &amp; ";DATABASE=" &amp; db_name &amp; ";UID="   &amp; db_username &amp; ";OPTION=16387;PWD=" &amp; db_userpassword<BR>
+   <BR>
+   Note   the "OPTION=16387" which is required. Also, you may have to manually rename   "fldGalleryTitleThum" to "fldGalleryTitleThumb" either in the .sql file that's   generated or via the PHP MySQL Admin screen (that's what worked for me). <BR>
+   <BR>
+   More info on OPTION=16387: <A href="http://www.google.com/search?num=50&hl=en&q=OPTION=16387+asp" rel="nofollow">http://www.google.com/search?num=50&amp;hl=en&amp;q=OPTION=16387+asp</A><BR>
+   <BR>
+   <strong>approve_comments   Error</strong><BR>
+   Replace (on line 106):<BR>
+</p>
+ <DIV><strong>Code:</strong>
+    <DIV>rsComments.Fields.Item("commentID").Value<BR>
+      rsComments.Fields.Item("tblComment.BlogID").Value</DIV>
+</DIV>
+<BR>
+With:<BR>
+<DIV><strong>Code:</strong>
+    <DIV>rsComments.Fields(0).Value<BR>
+      rsComments.Fields(1).Value </DIV>
+</DIV>
+<BR>
+<BR>
+Sample default mysql file:<BR>
+<strong>Code:</strong> <BR>
+# MdbToMySQL MySQL-Dump<BR>
+# version 1.01<BR>
+# <A href="http://www.zebradb.de" rel="nofollow">http://www.zebradb.de</A><BR>
+#   --------------------------------------------------------<BR>
+<BR>
+#<BR>
+# Table   structure for table tblAuthor<BR>
+#<BR>
+<BR>
+DROP TABLE IF EXISTS   tblAuthor;<BR>
+CREATE TABLE tblAuthor (<BR>
+&nbsp; &nbsp;fldAuthorID INT NOT NULL   AUTO_INCREMENT,<BR>
+&nbsp; &nbsp;fldAuthorUsername VARCHAR(100),<BR>
+&nbsp; &nbsp;fldAuthorRealName   VARCHAR(100),<BR>
+&nbsp; &nbsp;fldAuthorEmail VARCHAR(100),<BR>
+&nbsp; &nbsp;fldAuthorWebsite   VARCHAR(100),<BR>
+&nbsp; &nbsp;fldAuthorBlurb TEXT,<BR>
+&nbsp; &nbsp;fldAuthorPassword   VARCHAR(50),<BR>
+&nbsp; &nbsp;Approved SMALLINT,<BR>
+&nbsp; &nbsp;fldAdmin INT DEFAULT 0 NOT   NULL,<BR>
+&nbsp; &nbsp;INDEX (fldAuthorID),<BR>
+&nbsp; &nbsp;PRIMARY KEY   (fldAuthorID)<BR>
+);<BR>
+<BR>
+#<BR>
+# Table data for table   tblAuthor<BR>
+#<BR>
+<BR>
+INSERT INTO tblAuthor (fldAuthorID, fldAuthorUsername,   fldAuthorRealName, fldAuthorEmail, fldAuthorWebsite, fldAuthorBlurb,   fldAuthorPassword, Approved, fldAdmin) VALUES (1, 'admin', 'asdf',   'asdf@asdf.com', 'http://domain.com', 'Test', 'password', 1, 1);<BR>
+<BR>
+#<BR>
+#   Table structure for table tblBlog<BR>
+#<BR>
+<BR>
+DROP TABLE IF EXISTS   tblBlog;<BR>
+CREATE TABLE tblBlog (<BR>
+&nbsp; &nbsp;BlogID INT NOT NULL   AUTO_INCREMENT,<BR>
+&nbsp; &nbsp;BlogHeadline VARCHAR(255) NOT NULL,<BR>
+&nbsp; &nbsp;BlogHTML TEXT   NOT NULL,<BR>
+&nbsp; &nbsp;BlogDate DATETIME DEFAULT '0' NOT NULL,<BR>
+&nbsp; &nbsp;BlogCat INT,<BR>
+&nbsp;   &nbsp;BlogAuthor INT,<BR>
+&nbsp; &nbsp;BlogCommentInclude SMALLINT,<BR>
+&nbsp; &nbsp;BlogReadMore   SMALLINT,<BR>
+&nbsp; &nbsp;BlogDraft SMALLINT,<BR>
+&nbsp; &nbsp;INDEX (BlogID),<BR>
+&nbsp; &nbsp;PRIMARY KEY   (BlogID)<BR>
+);<BR>
+<BR>
+#<BR>
+# Table data for table tblBlog<BR>
+#<BR>
+<BR>
+INSERT   INTO tblBlog (BlogID, BlogHeadline, BlogHTML, BlogDate, BlogCat, BlogAuthor,   BlogCommentInclude, BlogReadMore, BlogDraft) VALUES (12, 'Introduction',   '&lt;BLOCKQUOTE dir=ltr style=\"MARGIN-RIGHT: 0px\"&gt;&lt;P&gt;&lt;EM&gt;\"All   happy families are alike; every unhappy family is unhappy in its own way.\" -   Leo Tolstoy&lt;/EM&gt;&lt;/P&gt;&lt;/BLOCKQUOTE&gt;', '2004-01-09 09:01:19', 1,   1, 1, 0, 0);<BR>
+<BR>
+#<BR>
+# Table structure for table tblBlogRSS<BR>
+#<BR>
+<BR>
+DROP   TABLE IF EXISTS tblBlogRSS;<BR>
+CREATE TABLE tblBlogRSS (<BR>
+&nbsp; &nbsp;rssID INT NOT   NULL AUTO_INCREMENT,<BR>
+&nbsp; &nbsp;blogTitle VARCHAR(255) NOT NULL,<BR>
+&nbsp; &nbsp;blogSubTitle   VARCHAR(255),<BR>
+&nbsp; &nbsp;blogDesc TEXT NOT NULL,<BR>
+&nbsp; &nbsp;blogURL VARCHAR(255) NOT   NULL,<BR>
+&nbsp; &nbsp;blogImage VARCHAR(255) NOT NULL,<BR>
+&nbsp; &nbsp;blogAuthor VARCHAR(255) NOT   NULL,<BR>
+&nbsp; &nbsp;blogEmail VARCHAR(255) NOT NULL,<BR>
+&nbsp; &nbsp;blogPosts INT,<BR>
+&nbsp;   &nbsp;blogLayout INT DEFAULT 1 NOT NULL,<BR>
+&nbsp; &nbsp;PRIMARY KEY (rssID),<BR>
+&nbsp; &nbsp;INDEX   (rssID)<BR>
+);<BR>
+<BR>
+#<BR>
+# Table data for table tblBlogRSS<BR>
+#<BR>
+<BR>
+INSERT   INTO tblBlogRSS (rssID, blogTitle, blogSubTitle, blogDesc, blogURL, blogImage,   blogAuthor, blogEmail, blogPosts, blogLayout) VALUES (1, 'Blog Title', 'Sub   Title', 'Blog Description', 'http://betaparticle.dyndns.org/',   'http://domain.com/blog/blog_button.jpg', 'asdf', 'asdf@asdf.com', 20,   4);<BR>
+<BR>
+#<BR>
+# Table structure for table tblCat<BR>
+#<BR>
+<BR>
+DROP TABLE IF   EXISTS tblCat;<BR>
+CREATE TABLE tblCat (<BR>
+&nbsp; &nbsp;CatID INT NOT NULL   AUTO_INCREMENT,<BR>
+&nbsp; &nbsp;CatName VARCHAR(200),<BR>
+&nbsp; &nbsp;CatDesc VARCHAR(100),<BR>
+&nbsp;   &nbsp;INDEX (CatID),<BR>
+&nbsp; &nbsp;PRIMARY KEY (CatID)<BR>
+);<BR>
+<BR>
+#<BR>
+# Table data for   table tblCat<BR>
+#<BR>
+<BR>
+INSERT INTO tblCat (CatID, CatName, CatDesc) VALUES (1,   'Blog', 'description');<BR>
+<BR>
+#<BR>
+# Table structure for table   tblComment<BR>
+#<BR>
+<BR>
+DROP TABLE IF EXISTS tblComment;<BR>
+CREATE TABLE   tblComment (<BR>
+&nbsp; &nbsp;commentID INT NOT NULL AUTO_INCREMENT,<BR>
+&nbsp; &nbsp;blogID INT   DEFAULT 0 NOT NULL,<BR>
+&nbsp; &nbsp;commentDate DATETIME DEFAULT '0' NOT NULL,<BR>
+&nbsp;   &nbsp;commentName VARCHAR(255) NOT NULL,<BR>
+&nbsp; &nbsp;commentEmail VARCHAR(255),<BR>
+&nbsp;   &nbsp;commentURL VARCHAR(255),<BR>
+&nbsp; &nbsp;commentHTML TEXT NOT NULL,<BR>
+&nbsp; &nbsp;commentInclude   INT DEFAULT 0 NOT NULL,<BR>
+&nbsp; &nbsp;INDEX (blogID),<BR>
+&nbsp; &nbsp;INDEX (commentID),<BR>
+&nbsp;   &nbsp;PRIMARY KEY (commentID)<BR>
+);<BR>
+<BR>
+#<BR>
+# Table data for table   tblComment<BR>
+#<BR>
+<BR>
+#<BR>
+# Table structure for table   tblGallery<BR>
+#<BR>
+<BR>
+DROP TABLE IF EXISTS tblGallery;<BR>
+CREATE TABLE   tblGallery (<BR>
+&nbsp; &nbsp;fldGalleryID INT NOT NULL AUTO_INCREMENT,<BR>
+&nbsp;   &nbsp;fldGalleryTitle VARCHAR(100),<BR>
+&nbsp; &nbsp;fldGalleryDesc TEXT,<BR>
+&nbsp; &nbsp;fldGalleryPic   VARCHAR(100),<BR>
+&nbsp; &nbsp;fldGalleryCreated DATETIME,<BR>
+&nbsp; &nbsp;fldGalleryUser INT DEFAULT   0 NOT NULL,<BR>
+&nbsp; &nbsp;INDEX (fldGalleryID),<BR>
+&nbsp; &nbsp;PRIMARY KEY   (fldGalleryID)<BR>
+);<BR>
+<BR>
+#<BR>
+# Table data for table   tblGallery<BR>
+#<BR>
+<BR>
+#<BR>
+# Table structure for table   tblGalleryConfig<BR>
+#<BR>
+<BR>
+DROP TABLE IF EXISTS tblGalleryConfig;<BR>
+CREATE   TABLE tblGalleryConfig (<BR>
+&nbsp; &nbsp;fldGalleryConfigID INT NOT NULL   AUTO_INCREMENT,<BR>
+&nbsp; &nbsp;fldGalleryTitleThumb SMALLINT,<BR>
+&nbsp; &nbsp;fldGalleryThumb   SMALLINT,<BR>
+&nbsp; &nbsp;INDEX (fldGalleryConfigID),<BR>
+&nbsp; &nbsp;PRIMARY KEY   (fldGalleryConfigID)<BR>
+);<BR>
+<BR>
+#<BR>
+# Table data for table   tblGalleryConfig<BR>
+#<BR>
+<BR>
+INSERT INTO tblGalleryConfig (fldGalleryConfigID,   fldGalleryTitleThumb, fldGalleryThumb) VALUES (1, 200, 100);<BR>
+<BR>
+#<BR>
+# Table   structure for table tblLayout<BR>
+#<BR>
+<BR>
+DROP TABLE IF EXISTS   tblLayout;<BR>
+CREATE TABLE tblLayout (<BR>
+&nbsp; &nbsp;layoutid INT NOT NULL   AUTO_INCREMENT,<BR>
+&nbsp; &nbsp;layout1 TEXT,<BR>
+&nbsp; &nbsp;layout2 TEXT,<BR>
+&nbsp; &nbsp;layout3 TEXT,<BR>
+&nbsp;   &nbsp;layout4 TEXT,<BR>
+&nbsp; &nbsp;layout5 TEXT,<BR>
+&nbsp; &nbsp;layoutTitle VARCHAR(100) NOT NULL,<BR>
+&nbsp;   &nbsp;INDEX (layoutid),<BR>
+&nbsp; &nbsp;PRIMARY KEY (layoutid)<BR>
+);<BR>
+<BR>
+#<BR>
+# Table data   for table tblLayout<BR>
+#<BR>
+<BR>
+INSERT INTO tblLayout (layoutid, layout1,   layout2, layout3, layout4, layout5, layoutTitle) VALUES (3, '&lt;!DOCTYPE html   PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"   \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"&gt;&lt;html   xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\"   lang=\"en\"&gt;&lt;head&gt;&lt;meta http-equiv=\"Content-Type\"   content=\"text/html; charset=iso-8859-1\" /&gt;&lt;meta name=\"generator\"   content=\"BP Blog 7.0\" /&gt;&lt;link rel=\"copyright\"   href=\"http://creativecommons.org/licenses/by-nc-sa/2.5/\" /&gt;', '&lt;link   href=\"Themes/Black Minima/styles-site.css\" rel=\"stylesheet\"   type=\"text/css\" /&gt;&lt;link rel=\"stylesheet\" href=\"css/lightbox.css\"   type=\"text/css\" media=\"screen\" /&gt;&lt;script src=\"js/prototype.js\"   type=\"text/javascript\"&gt;&lt;/script&gt;&lt;script   src=\"js/scriptaculous.js?load=effects\"   type=\"text/javascript\"&gt;&lt;/script&gt;\t&lt;script src=\"js/lightbox.js\"   type=\"text/javascript\"&gt;&lt;/script&gt;&lt;/head&gt;&lt;BODY&gt;&lt;DIV   id=container&gt;&lt;DIV id=header&gt;', '&lt;/DIV&gt;&lt;DIV   id=content&gt;&lt;DIV id=main&gt;&lt;!-- AdSense Code --&gt;&lt;style   type=\"text/css\"&gt;&lt;!--.adsensefloat {\tmargin: 4px;\tpadding: 2px;\tfloat:   right;\tmargin-top:10px;}--&gt;&lt;/style&gt;&lt;div   class=\"adsensefloat\"&gt;&lt;script   type=\"text/javascript\"&gt;&lt;!--google_ad_client =   \"pub-0172387945911790\";google_ad_width = 120;google_ad_height =   240;google_ad_format = \"120x240_as\";google_ad_channel   =\"7792557859\";google_color_border = \"000000\";google_color_bg =   \"000000\";google_color_link = \"AADD99\";google_color_text =   \"CCCCCC\";google_color_url = \"AADD99\";//--&gt;&lt;/script&gt;&lt;script   type=\"text/javascript\"&nbsp;   src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\"&gt;&lt;/script&gt;&lt;/div&gt;&lt;!--   AdSense Code --&gt;', '&lt;/DIV&gt;&lt;DIV id=sidebar&gt;&lt;h2   class=sidebar-title&gt;Menu&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a   href=\"default.asp\"&gt;Home&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template.asp?pagename=about\"&gt;About/Download BP   Blog&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p style=\"text-align:center;\"   &gt;&lt;strong&gt;Get BP Blog Updates by Email&lt;/strong&gt;&lt;/p&gt;&lt;form   style=\"text-align:center;\"   action=\"http://www.feedburner.com/fb/a/emailverify\" method=\"post\"   target=\"_blank\"&gt;&lt;p&gt;Enter your email   address:&lt;/p&gt;&lt;p&gt;&lt;input name=\"email\" type=\"text\"   style=\"width:140px\" size=\"20\"/&gt;&lt;/p&gt;&lt;input type=\"hidden\"   value=\"http://feeds.feedburner.com/~e?ffid=574457\" name=\"url\"/&gt;&lt;input   type=\"hidden\" value=\"BP Blog\" name=\"title\"/&gt;&lt;input type=\"submit\"   value=\"Subscribe\" /&gt;&lt;p&gt;Delivered by &lt;a   href=\"http://www.feedburner.com/\"   target=\"_blank\"&gt;FeedBurner&lt;/a&gt;&lt;/p&gt;&lt;/form&gt;', '&lt;/DIV&gt;   &lt;/DIV&gt;&lt;DIV id=footer&gt;&lt;P&gt;Powered by &lt;a   href=\"http://blog.betaparticle.com\" title=\"Powered by BP Blog 7.0\"&gt;BP   Blog 7.0&lt;/a&gt;\t\t | &lt;a   href=\"rss.xml\"&gt;Feed   (RSS)&lt;/a&gt;&lt;/P&gt;&lt;/DIV&gt;\t&lt;/DIV&gt;\t   &lt;/BODY&gt;&lt;/HTML&gt;', 'Black Minima');<BR>
+INSERT INTO tblLayout   (layoutid, layout1, layout2, layout3, layout4, layout5, layoutTitle) VALUES (4,   '&lt;!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"   \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"&gt;&lt;html   xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\"   lang=\"en\"&gt;&lt;head&gt;&lt;meta http-equiv=\"Content-Type\"   content=\"text/html; charset=iso-8859-1\" /&gt;&lt;meta name=\"generator\"   content=\"BP Blog 7.0\" /&gt;&lt;link rel=\"copyright\"   href=\"http://creativecommons.org/licenses/by-nc-sa/2.5/\" /&gt;', '&lt;link   href=\"Themes/White Minima/styles-site.css\" rel=\"stylesheet\"   type=\"text/css\" /&gt;&lt;/head&gt;&lt;BODY&gt;&lt;DIV id=container&gt;&lt;DIV   id=header&gt;', '&lt;/DIV&gt;&lt;DIV id=content&gt;&lt;DIV id=main&gt;',   '&lt;/DIV&gt;&lt;DIV id=sidebar&gt;&lt;h2   class=sidebar-title&gt;Menu&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a   href=\"default.asp\"&gt;Home&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template.asp?pagename=about\"&gt;About BP   Blog&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template_gallery.asp\"&gt;Gallery&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;',   '&lt;/DIV&gt; &lt;/DIV&gt;&lt;DIV id=footer&gt;&lt;P&gt;Powered by &lt;a   href=\"http://blog.betaparticle.com\" title=\"Powered by BP Blog 7.0\"&gt;BP   Blog 7.0&lt;/a&gt;\t\t | &lt;a href=\"rss.xml\"&gt;Feed   (RSS)&lt;/a&gt;&lt;/P&gt;&lt;/DIV&gt;\t&lt;/DIV&gt;\t   &lt;/BODY&gt;&lt;/HTML&gt;', 'White Minima');<BR>
+INSERT INTO tblLayout   (layoutid, layout1, layout2, layout3, layout4, layout5, layoutTitle) VALUES (5,   '&lt;!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"   \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"&gt;&lt;html   xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\"   lang=\"en\"&gt;&lt;head&gt;&lt;meta http-equiv=\"Content-Type\"   content=\"text/html; charset=iso-8859-1\" /&gt;&lt;meta name=\"generator\"   content=\"BP Blog 7.0\" /&gt;&lt;link rel=\"copyright\"   href=\"http://creativecommons.org/licenses/by-nc-sa/2.5/\" /&gt;', '&lt;link   href=\"Themes/Rounders/styles-site.css\" rel=\"stylesheet\" type=\"text/css\"   /&gt;&lt;/head&gt;&lt;body&gt;&lt;!-- Begin #content - Centers all content and   provides edges for floated columns --&gt;&lt;div id=\"content\"&gt;&lt;!-- Blog   Header --&gt;&lt;div id=\"header\"&gt;&lt;div&gt; ',   '&lt;/div&gt;&lt;/div&gt;&lt;!-- Begin #main - Contains main-column blog content   --&gt;&lt;div id=\"main\"&gt;&lt;div id=\"main2\"&gt;&lt;div id=\"main3\"&gt;',   '&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- End #main --&gt;&lt;!-- Begin   #sidebar --&gt;&lt;div id=\"sidebar\"&gt;&nbsp; &lt;!-- Begin #profile-container   --&gt;&nbsp; &lt;div id=\"profile-container\"&gt;&nbsp; &nbsp; &lt;h2   class=\"sidebar-title\"&gt;Profile&lt;/h2&gt;&nbsp; &nbsp; &nbsp; &lt;dl   class=\"profile-datablock\"&gt;&nbsp; &nbsp; &nbsp; &lt;dt class=\"profile-img\"&gt;&lt;img   src=\"http://betaparticle.com/blog/Films_Covers/50.jpg\" alt=\"\"   /&gt;&lt;/dt&gt;&nbsp; &nbsp; &nbsp; &lt;dd   class=\"profile-data\"&gt;&lt;strong&gt;Name:&lt;/strong&gt;Matt&lt;/dd&gt;&nbsp; &nbsp; &nbsp;   &lt;dd class=\"profile-data\"&gt;&lt;strong&gt;Location:&lt;/strong&gt; Atlanta,   GA&lt;/dd&gt;&nbsp; &nbsp; &lt;/dl&gt;&nbsp; &nbsp; &nbsp; &lt;p class=\"profile-textblock\"&gt;I am the   administrator and programmer of BP Blog.&nbsp; &nbsp; &lt;/p&gt;&nbsp; &nbsp; &nbsp; &lt;p   class=\"profile-link\"&gt;&nbsp; &nbsp; &nbsp; &lt;a href=\"template_author.asp?id=1\"&gt;View   my complete profile&lt;/a&gt;&nbsp; &nbsp; &lt;/p&gt;&nbsp; &lt;/div&gt;&nbsp; &lt;!-- End #profile   --&gt;&nbsp; &lt;div class=\"box\"&gt;&lt;div class=\"box2\"&gt;&lt;div   class=\"box3\"&gt;&lt;h2   class=sidebar-title&gt;Menu&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a   href=\"default.asp\"&gt;Home&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template.asp?pagename=about\"&gt;About BP   Blog&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"http://www.betaparticle.com/wiki/BP-Blog.ashx\"   target=\"_blank\"&gt;Readme/Download&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p   style=\"text-align:center;\" &gt;&lt;strong&gt;Get BP Blog Updates by   Email&lt;/strong&gt;&lt;/p&gt;&lt;form style=\"text-align:center;\"   action=\"http://www.feedburner.com/fb/a/emailverify\" method=\"post\"   target=\"_blank\"&gt;&lt;p&gt;Enter your email   address:&lt;/p&gt;&lt;p&gt;&lt;input name=\"email\" type=\"text\"   style=\"width:140px\" size=\"20\"/&gt;&lt;/p&gt;&lt;input type=\"hidden\"   value=\"http://feeds.feedburner.com/~e?ffid=574457\" name=\"url\"/&gt;&lt;input   type=\"hidden\" value=\"BP Blog\" name=\"title\"/&gt;&lt;input type=\"submit\"   value=\"Subscribe\" /&gt;&lt;p&gt;Delivered by &lt;a   href=\"http://www.feedburner.com/\"   target=\"_blank\"&gt;FeedBurner&lt;/a&gt;&lt;/p&gt;&lt;/form&gt;', '&lt;div   align=\"center\"&gt;&nbsp; &lt;table width=\"100%\" border=\"0\" align=\"center\"   cellpadding=\"4\" cellspacing=\"0\"&gt;&nbsp; &nbsp; &lt;tbody&gt;&nbsp; &nbsp; &nbsp; &lt;tr&gt;&nbsp; &nbsp; &nbsp; &nbsp;   &lt;td valign=\"middle\" align=\"center\"   width=\"50%\"&gt;&lt;h3&gt;&lt;strong&gt;Donate and support the development of   BP Blog&lt;/strong&gt;&lt;/h3&gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;and receive &lt;/p&gt;&nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &lt;p&gt;&lt;strong&gt;Personal Email Support&lt;/strong&gt;&lt;/p&gt;&nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &lt;form action=\"https://www.paypal.com/cgi-bin/webscr\"   method=\"post\"&gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;input type=\"hidden\" name=\"cmd\"   value=\"_s-xclick\" /&gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;input type=\"image\" alt=\"Make   payments with PayPal - it\'s fast, free and secure!\"   src=\"https://www.paypal.com/en_US/i/btn/x-click-but21.gif\" border=\"0\"   name=\"submit2\" /&gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;input type=\"hidden\" name=\"encrypted\"   value=\"-----BEGIN   PKCS7-----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-----END   PKCS7-----&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \" /&gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/form&gt;&lt;/td&gt;&nbsp; &nbsp; &nbsp;   &lt;/tr&gt;&nbsp; &nbsp; &lt;/tbody&gt;&nbsp; &lt;/table&gt;&lt;/div&gt;&lt;h2   class=\"sidebar-title\"&gt;Meta&lt;/h2&gt;&lt;ul&gt;\t&lt;li&gt;&lt;a   href=\"rss.xml\" title=\"Syndicate this site (RSS XML   2.0)\"&gt;&lt;img src=\"images/feed-icon-32x32.png\" border=\"0\"   alt=\"Syndicate this site (RSS XML 2.0)\"   /&gt;&lt;/a&gt;&lt;/li&gt;\t&lt;li&gt;Powered by &lt;a   href=\"http://blog.betaparticle.com/\"&gt;bp blog   7.0&lt;/a&gt;&lt;/li&gt;\t&lt;li&gt;This weblog is licensed under a &lt;a   href=\"http://creativecommons.org/licenses/by-nc-sa/2.5/\"   target=\"_blank\"&gt;Creative Commons   License&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;script   type=\"text/javascript\"&gt;&lt;!--google_ad_client =   \"pub-0172387945911790\";google_ad_width = 120;google_ad_height =   600;google_ad_format = \"120x600_as\";google_ad_type =   \"text\";google_ad_channel =\"7792557859\";google_color_border =   \"ffffff\";google_color_bg = \"ffffff\";google_color_link =   \"AADD99\";google_color_text = \"CCCCCC\";google_color_url =   \"AADD99\";//--&gt;&lt;/script&gt;&lt;script type=\"text/javascript\"&nbsp;   src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\"&gt;&lt;/script&gt;&lt;/p&gt;&nbsp;   &nbsp; &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&nbsp; &lt;!-- End .box   --&gt;&lt;/div&gt;&lt;!-- End #sidebar --&gt;&lt;!-- Begin #footer --&gt;&lt;div   id=\"footer\"&gt;&lt;div&gt;&lt;div&gt;&lt;hr /&gt;&lt;P&gt;Powered by &lt;a   href=\"http://blog.betaparticle.com\" title=\"Powered by BP Blog 7.0\"&gt;BP   Blog 7.0&lt;/a&gt;\t\t | &lt;a   href=\"rss.xml\"&gt;Feed   (RSS)&lt;/a&gt;&lt;/P&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- End #footer   --&gt;&lt;/div&gt;&lt;!-- End #content --&gt;&lt;/body&gt;&lt;/html&gt;',   'Rounders');<BR>
+INSERT INTO tblLayout (layoutid, layout1, layout2, layout3,   layout4, layout5, layoutTitle) VALUES (6, '&lt;!DOCTYPE html PUBLIC   \"-//W3C//DTD XHTML 1.0 Transitional//EN\"   \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"&gt;&lt;html   xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\"   lang=\"en\"&gt;&lt;head&gt;&lt;meta http-equiv=\"Content-Type\"   content=\"text/html; charset=iso-8859-1\" /&gt;&lt;meta name=\"generator\"   content=\"BP Blog 7.0\" /&gt;&lt;link rel=\"copyright\"   href=\"http://creativecommons.org/licenses/by-nc-sa/2.5/\" /&gt;', '&lt;link   href=\"Themes/Dots/styles-site.css\" rel=\"stylesheet\" type=\"text/css\"   /&gt;&lt;/head&gt;&lt;body&gt;&lt;!-- Begin #content - Centers all content and   provides edges for floated columns --&gt;&lt;div id=\"content\"&gt;&lt;!-- Blog   Header --&gt;&lt;div id=\"header\"&gt;&lt;div&gt;',   '&lt;/div&gt;&lt;/div&gt;&lt;!-- Begin #main - Contains main-column blog content   --&gt;&lt;div id=\"main\"&gt;&lt;div id=\"main2\"&gt;&lt;div id=\"main3\"&gt;',   '&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- End #main --&gt;&lt;!-- Begin   #sidebar --&gt;&lt;div id=\"sidebar\"&gt;&nbsp; &lt;!-- Begin #profile-container   --&gt;&nbsp; &lt;div id=\"profile-container\"&gt;&nbsp; &nbsp; &lt;h2   class=\"sidebar-title\"&gt;Profile&lt;/h2&gt;&nbsp; &nbsp; &nbsp; &lt;dl   class=\"profile-datablock\"&gt;&nbsp; &nbsp; &nbsp; &lt;dt class=\"profile-img\"&gt;&lt;img   src=\"http://betaparticle.com/blog/Films_Covers/50.jpg\" alt=\"\"   /&gt;&lt;/dt&gt;&nbsp; &nbsp; &nbsp; &lt;dd   class=\"profile-data\"&gt;&lt;strong&gt;Name:&lt;/strong&gt;Matt&lt;/dd&gt;&nbsp; &nbsp; &nbsp;   &lt;dd class=\"profile-data\"&gt;&lt;strong&gt;Location:&lt;/strong&gt; Atlanta,   GA&lt;/dd&gt;&nbsp; &nbsp; &lt;/dl&gt;&nbsp; &nbsp; &nbsp; &lt;p class=\"profile-textblock\"&gt;I am the   administrator and programmer of BP Blog.&nbsp; &nbsp; &lt;/p&gt;&nbsp; &nbsp; &nbsp; &lt;p   class=\"profile-link\"&gt;&nbsp; &nbsp; &nbsp; &lt;a href=\"template_author.asp?id=1\"&gt;View   my complete profile&lt;/a&gt;&nbsp; &nbsp; &lt;/p&gt;&nbsp; &lt;/div&gt;&nbsp; &lt;!-- End #profile   --&gt;&nbsp; &lt;div class=\"box\"&gt;&lt;div class=\"box2\"&gt;&lt;div   class=\"box3\"&gt;&lt;h2   class=sidebar-title&gt;Menu&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a   href=\"default.asp\"&gt;Home&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template.asp?pagename=about\"&gt;About BP   Blog&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template_gallery.asp\"&gt;Gallery&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;', '&nbsp; &nbsp;   &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&nbsp; &lt;!-- End .box --&gt;&lt;/div&gt;&lt;!--   End #sidebar --&gt;&lt;!-- Begin #footer --&gt;&lt;div   id=\"footer\"&gt;&lt;div&gt;&lt;div&gt;&lt;hr /&gt;&lt;P&gt;Powered by &lt;a   href=\"http://blog.betaparticle.com\" title=\"Powered by BP Blog 7.0\"&gt;BP   Blog 7.0&lt;/a&gt;\t\t | &lt;a href=\"rss.xml\"&gt;Feed   (RSS)&lt;/a&gt;&lt;/P&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- End #footer   --&gt;&lt;/div&gt;&lt;!-- End #content --&gt;&lt;/body&gt;&lt;/html&gt;',   'Dots');<BR>
+INSERT INTO tblLayout (layoutid, layout1, layout2, layout3, layout4,   layout5, layoutTitle) VALUES (7, '&lt;!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML   1.0 Transitional//EN\"   \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"&gt;&lt;html   xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\"   lang=\"en\"&gt;&lt;head&gt;&lt;meta http-equiv=\"Content-Type\"   content=\"text/html; charset=iso-8859-1\" /&gt;&lt;meta name=\"generator\"   content=\"BP Blog 7.0\" /&gt;&lt;link rel=\"copyright\"   href=\"http://creativecommons.org/licenses/by-nc-sa/2.5/\" /&gt;', '&lt;link   href=\"Themes/Blue Minima/styles-site.css\" rel=\"stylesheet\" type=\"text/css\"   /&gt;&lt;/head&gt;&lt;BODY&gt;&lt;DIV id=container&gt;&lt;DIV id=header&gt;',   '&lt;/DIV&gt;&lt;DIV id=content&gt;&lt;DIV id=main&gt;', '&lt;/DIV&gt;&lt;DIV   id=sidebar&gt;&lt;h2   class=sidebar-title&gt;Menu&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a   href=\"default.asp\"&gt;Home&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template.asp?pagename=about\"&gt;About BP   Blog&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template_gallery.asp\"&gt;Gallery&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;',   '&lt;/DIV&gt; &lt;/DIV&gt;&lt;DIV id=footer&gt;&lt;P&gt;Powered by &lt;a   href=\"http://blog.betaparticle.com\" title=\"Powered by BP Blog 7.0\"&gt;BP   Blog 7.0&lt;/a&gt;\t\t | &lt;a href=\"rss.xml\"&gt;Feed   (RSS)&lt;/a&gt;&lt;/P&gt;&lt;/DIV&gt;\t&lt;/DIV&gt;\t   &lt;/BODY&gt;&lt;/HTML&gt;', 'Blue Minima');<BR>
+INSERT INTO tblLayout (layoutid,   layout1, layout2, layout3, layout4, layout5, layoutTitle) VALUES (8,   '&lt;!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"   \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"&gt;&lt;html   xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\"   lang=\"en\"&gt;&lt;head&gt;&lt;meta http-equiv=\"Content-Type\"   content=\"text/html; charset=iso-8859-1\" /&gt;&lt;meta name=\"generator\"   content=\"BP Blog 7.0\" /&gt;&lt;link rel=\"copyright\"   href=\"http://creativecommons.org/licenses/by-nc-sa/2.5/\" /&gt;', '&lt;link   href=\"Themes/Snapshot/styles-site.css\" rel=\"stylesheet\" type=\"text/css\"   /&gt;&lt;/head&gt;&lt;body&gt;&lt;!-- Begin #content - Centers all content and   provides edges for floated columns --&gt;&lt;div id=\"content\"&gt;&lt;div   id=\"header\"&gt;&lt;div&gt;', '&lt;/div&gt;&lt;/div&gt;&lt;!-- Begin #main -   Contains main-column blog content --&gt;&lt;div id=\"main\"&gt;',   '&lt;/div&gt;&lt;!-- End #main --&gt;&lt;!-- Begin #sidebar --&gt;&lt;div   id=\"sidebar\"&gt;&nbsp; &lt;!-- Begin #profile-container --&gt;&nbsp; &lt;div   id=\"profile-container\"&gt;&nbsp; &nbsp; &lt;h2   class=\"sidebar-title\"&gt;Profile&lt;/h2&gt;&nbsp; &nbsp; &nbsp; &lt;dl   class=\"profile-datablock\"&gt;&nbsp; &nbsp; &nbsp; &lt;dt class=\"profile-img\"&gt;&lt;img   src=\"http://betaparticle.com/blog/Films_Covers/50.jpg\" alt=\"\"   /&gt;&lt;/dt&gt;&nbsp; &nbsp; &nbsp; &lt;dd   class=\"profile-data\"&gt;&lt;strong&gt;Name:&lt;/strong&gt;Matt&lt;/dd&gt;&nbsp; &nbsp; &nbsp;   &lt;dd class=\"profile-data\"&gt;&lt;strong&gt;Location:&lt;/strong&gt; Atlanta,   GA&lt;/dd&gt;&nbsp; &nbsp; &lt;/dl&gt;&nbsp; &nbsp; &nbsp; &lt;p class=\"profile-textblock\"&gt;I am the   administrator and programmer of BP Blog.&nbsp; &nbsp; &lt;/p&gt;&nbsp; &nbsp; &nbsp; &lt;p   class=\"profile-link\"&gt;&nbsp; &nbsp; &nbsp; &lt;a href=\"template_author.asp?id=1\"&gt;View   my complete profile&lt;/a&gt;&nbsp; &nbsp; &lt;/p&gt;&nbsp; &lt;/div&gt;&nbsp; &lt;!-- End #profile   --&gt;&nbsp; &lt;div class=\"box\"&gt;&lt;div class=\"box2\"&gt;&lt;div   class=\"box3\"&gt;&lt;h2   class=sidebar-title&gt;Menu&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a   href=\"default.asp\"&gt;Home&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template.asp?pagename=about\"&gt;About BP   Blog&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template_gallery.asp\"&gt;Gallery&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;',   '&lt;/div&gt;&lt;!-- End #sidebar --&gt;&lt;!-- Begin #footer --&gt;&lt;div   id=\"footer\"&gt;&lt;hr /&gt;&lt;P&gt;Powered by &lt;a   href=\"http://blog.betaparticle.com\" title=\"Powered by BP Blog 7.0\"&gt;BP   Blog 7.0&lt;/a&gt;\t\t | &lt;a href=\"rss.xml\"&gt;Feed   (RSS)&lt;/a&gt;&lt;/P&gt;&lt;/div&gt;&lt;!-- End #footer   --&gt;&lt;/div&gt;&lt;!-- End #content --&gt;&lt;/body&gt;&lt;/html&gt;',   'Snapshot');<BR>
+INSERT INTO tblLayout (layoutid, layout1, layout2, layout3,   layout4, layout5, layoutTitle) VALUES (9, '&lt;!DOCTYPE html PUBLIC   \"-//W3C//DTD XHTML 1.0 Transitional//EN\"   \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"&gt;&lt;html   xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\"   lang=\"en\"&gt;&lt;head&gt;&lt;meta http-equiv=\"Content-Type\"   content=\"text/html; charset=iso-8859-1\" /&gt;&lt;meta name=\"generator\"   content=\"BP Blog 7.0\" /&gt;&lt;link rel=\"copyright\"   href=\"http://creativecommons.org/licenses/by-nc-sa/2.5/\" /&gt;', '&lt;link   href=\"Themes/ms_moto/styles-site.css\" rel=\"stylesheet\" type=\"text/css\"   /&gt;&lt;/head&gt;&lt;body&gt;&lt;!-- Begin wrapper --&gt;&lt;div   id=\"wrapper\"&gt;&nbsp; &lt;div id=\"blog-header\"&gt;', '&lt;/div&gt;&lt;!-- Begin   content --&gt;&lt;div id=\"content\"&gt;&nbsp; &lt;!-- Begin main column   --&gt;\t&lt;div id=\"main\"&gt;', '&nbsp; &lt;!-- End main column   --&gt;\t\t&lt;/div&gt;\t\t\t&lt;div id=\"sidebar\"&gt;&nbsp; &lt;!-- Begin   #profile-container --&gt;&nbsp; &lt;div id=\"profile-container\"&gt;&nbsp; &nbsp; &lt;h2   class=\"sidebar-title\"&gt;Profile&lt;/h2&gt;&nbsp; &nbsp; &nbsp; &lt;dl   class=\"profile-datablock\"&gt;&nbsp; &nbsp; &nbsp; &lt;dt class=\"profile-img\"&gt;&lt;img   src=\"http://betaparticle.com/blog/Films_Covers/50.jpg\" alt=\"\"   /&gt;&lt;/dt&gt;&nbsp; &nbsp; &nbsp; &lt;dd   class=\"profile-data\"&gt;&lt;strong&gt;Name:&lt;/strong&gt;Matt&lt;/dd&gt;&nbsp; &nbsp; &nbsp;   &lt;dd class=\"profile-data\"&gt;&lt;strong&gt;Location:&lt;/strong&gt; Atlanta,   GA&lt;/dd&gt;&nbsp; &nbsp; &lt;/dl&gt;&nbsp; &nbsp; &nbsp; &lt;p class=\"profile-textblock\"&gt;I am the   administrator and programmer of BP Blog.&nbsp; &nbsp; &lt;/p&gt;&nbsp; &nbsp; &nbsp; &lt;p   class=\"profile-link\"&gt;&nbsp; &nbsp; &nbsp; &lt;a href=\"template_author.asp?id=1\"&gt;View   my complete profile&lt;/a&gt;&nbsp; &nbsp; &lt;/p&gt;&nbsp; &lt;/div&gt;&nbsp; &lt;!-- End #profile   --&gt;&nbsp; &lt;div class=\"box\"&gt;&lt;div class=\"box2\"&gt;&lt;div   class=\"box3\"&gt;&lt;h2   class=sidebar-title&gt;Menu&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a   href=\"default.asp\"&gt;Home&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template.asp?pagename=about\"&gt;About BP   Blog&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template_gallery.asp\"&gt;Gallery&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;', '&nbsp;   &lt;!-- End sidebar --&gt;&nbsp; &lt;/div&gt;&lt;!-- End content   --&gt;&lt;/div&gt;&lt;div id=\"footer\"&gt;&lt;P&gt;Powered by &lt;a   href=\"http://blog.betaparticle.com\" title=\"Powered by BP Blog 7.0\"&gt;BP   Blog 7.0&lt;/a&gt;\t\t | &lt;a href=\"rss.xml\"&gt;Feed   (RSS)&lt;/a&gt;&lt;/P&gt;&lt;/div&gt;&lt;!-- End wrapper   --&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;', 'Ms. Moto (Pinky Lee   variation)');<BR>
+INSERT INTO tblLayout (layoutid, layout1, layout2, layout3,   layout4, layout5, layoutTitle) VALUES (10, '&lt;!DOCTYPE html PUBLIC   \"-//W3C//DTD XHTML 1.0 Transitional//EN\"   \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"&gt;&lt;html   xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\"   lang=\"en\"&gt;&lt;head&gt;&lt;meta http-equiv=\"Content-Type\"   content=\"text/html; charset=iso-8859-1\" /&gt;&lt;meta name=\"generator\"   content=\"BP Blog 7.0\" /&gt;&lt;link rel=\"copyright\"   href=\"http://creativecommons.org/licenses/by-nc-sa/2.5/\" /&gt;', '&lt;link   href=\"styles/style.css\" rel=\"stylesheet\" type=\"text/css\" /&gt;&lt;script   type=\"text/javascript\" src=\"js/prototype.js\"&gt;&lt;/script&gt;&lt;script   type=\"text/javascript\"   src=\"js/scriptaculous.js?load=effects\"&gt;&lt;/script&gt;&lt;script   type=\"text/javascript\" src=\"js/lightbox.js\"&gt;&lt;/script&gt;&lt;link   rel=\"stylesheet\" href=\"css/lightbox.css\" type=\"text/css\" media=\"screen\"   /&gt;&lt;link href=\"Themes/Minima 2/styles-site.css\" rel=\"stylesheet\"   type=\"text/css\" /&gt;&lt;/head&gt;&lt;BODY&gt;&lt;DIV id=container&gt;&lt;DIV   id=header&gt;', '&lt;/DIV&gt;&lt;DIV id=content&gt;&lt;DIV id=main&gt;',   '&lt;/DIV&gt;&lt;DIV id=sidebar&gt;&lt;h2   class=sidebar-title&gt;Menu&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a   href=\"default.asp\"&gt;Home&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template.asp?pagename=about\"&gt;About BP   Blog&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"http://www.betaparticle.com/wiki/BP-Blog.ashx\"   target=\"_blank\"&gt;Readme/Download&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p   style=\"text-align:center;\" &gt;&lt;strong&gt;Get BP Blog Updates by   Email&lt;/strong&gt;&lt;/p&gt;&lt;form style=\"text-align:center;\"   action=\"http://www.feedburner.com/fb/a/emailverify\" method=\"post\"   target=\"_blank\"&gt;&lt;p&gt;Enter your email   address:&lt;/p&gt;&lt;p&gt;&lt;input name=\"email\" type=\"text\"   style=\"width:140px\" size=\"20\"/&gt;&lt;/p&gt;&lt;input type=\"hidden\"   value=\"http://feeds.feedburner.com/~e?ffid=574457\" name=\"url\"/&gt;&lt;input   type=\"hidden\" value=\"BP Blog\" name=\"title\"/&gt;&lt;input type=\"submit\"   value=\"Subscribe\" /&gt;&lt;p&gt;Delivered by &lt;a   href=\"http://www.feedburner.com/\"   target=\"_blank\"&gt;FeedBurner&lt;/a&gt;&lt;/p&gt;&lt;/form&gt;&lt;div   align=\"center\"&gt;&nbsp; &lt;table width=\"100%\" border=\"0\" align=\"center\"   cellpadding=\"4\" cellspacing=\"0\"&gt;&nbsp; &nbsp; &lt;tbody&gt;&nbsp; &nbsp; &nbsp; &lt;tr&gt;&nbsp; &nbsp; &nbsp; &nbsp;   &lt;td valign=\"middle\" align=\"center\"   width=\"50%\"&gt;&lt;h3&gt;&lt;strong&gt;Donate and support the development of   BP Blog&lt;/strong&gt;&lt;/h3&gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;and receive &lt;/p&gt;&nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &lt;p&gt;&lt;strong&gt;Personal Email Support&lt;/strong&gt;&lt;/p&gt;&nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &lt;form action=\"https://www.paypal.com/cgi-bin/webscr\"   method=\"post\"&gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;input type=\"hidden\" name=\"cmd\"   value=\"_s-xclick\" /&gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;input type=\"image\" alt=\"Make   payments with PayPal - it\'s fast, free and secure!\"   src=\"https://www.paypal.com/en_US/i/btn/x-click-but21.gif\" border=\"0\"   name=\"submit2\" /&gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;input type=\"hidden\" name=\"encrypted\"   value=\"-----BEGIN   PKCS7-----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-----END   PKCS7-----&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \" /&gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/form&gt;&lt;/td&gt;&nbsp; &nbsp; &nbsp;   &lt;/tr&gt;&nbsp; &nbsp; &lt;/tbody&gt;&nbsp; &lt;/table&gt;&lt;/div&gt;&lt;h2   class=\"sidebar-title\"&gt;Meta&lt;/h2&gt;&lt;ul&gt;\t&lt;li&gt;&lt;a   href=\"rss.xml\" title=\"Syndicate this site (RSS XML   2.0)\"&gt;&lt;img src=\"images/feed-icon-32x32.png\" border=\"0\"   alt=\"Syndicate this site (RSS XML 2.0)\"   /&gt;&lt;/a&gt;&lt;/li&gt;\t&lt;li&gt;Powered by &lt;a   href=\"http://blog.betaparticle.com/\"&gt;bp blog   7.0&lt;/a&gt;&lt;/li&gt;\t&lt;li&gt;This weblog is licensed under a &lt;a   href=\"http://creativecommons.org/licenses/by-nc-sa/2.5/\"   target=\"_blank\"&gt;Creative Commons   License&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;script   type=\"text/javascript\"&gt;&lt;!--google_ad_client =   \"pub-0172387945911790\";google_ad_width = 120;google_ad_height =   600;google_ad_format = \"120x600_as\";google_ad_type =   \"text\";google_ad_channel =\"7792557859\";google_color_border =   \"ffffff\";google_color_bg = \"ffffff\";google_color_link =   \"AADD99\";google_color_text = \"CCCCCC\";google_color_url =   \"AADD99\";//--&gt;&lt;/script&gt;&lt;script type=\"text/javascript\"&nbsp;   src=\"http://pagead2.googlesyndication.com/pagead/show_ads.js\"&gt;&lt;/script&gt;&lt;/p&gt;   ', '&lt;/DIV&gt; &lt;/DIV&gt;&lt;DIV id=footer&gt;&lt;P&gt;Powered by &lt;a   href=\"http://blog.betaparticle.com\" title=\"Powered by BP Blog 7.0\"&gt;BP   Blog 7.0&lt;/a&gt;\t\t | &lt;a   href=\"rss.xml\"&gt;Feed   (RSS)&lt;/a&gt;&lt;/P&gt;&lt;/DIV&gt;\t&lt;/DIV&gt;\t   &lt;/BODY&gt;&lt;/HTML&gt;', 'Minima 2');<BR>
+INSERT INTO tblLayout (layoutid,   layout1, layout2, layout3, layout4, layout5, layoutTitle) VALUES (11,   '&lt;!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"   \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"&gt;&lt;html   xmlns=\"http://www.w3.org/1999/xhtml\"&gt;&lt;head   profile=\"http://gmpg.org/xfn/11\"&gt;\t&lt;meta http-equiv=\"Content-Type\"   content=\"text/html; charset=UTF-8\" /&gt; &lt;meta name=\"generator\"   content=\"BP Blog 7.0\" /&gt;&lt;link rel=\"copyright\"   href=\"http://creativecommons.org/licenses/by-nc-sa/2.5/\" /&gt;&nbsp; ', '&lt;link   href=\"Themes/Kubrick/style.css\" rel=\"stylesheet\" type=\"text/css\"   /&gt;&lt;/head&gt;&lt;body&gt;&lt;div id=\"page\"&gt;&lt;div   id=\"header\"&gt;\t&lt;div id=\"headerimg\"&gt;',   '&lt;/div&gt;&lt;/div&gt;&lt;hr /&gt;\t&lt;div id=\"content\"   class=\"narrowcolumn\"&gt; ', '&lt;/div&gt;\t&lt;div id=\"sidebar\"&gt;&lt;h2   class=sidebar-title&gt;Menu&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a   href=\"default.asp\"&gt;Home&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template.asp?pagename=about\"&gt;About BP   Blog&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a   href=\"template_gallery.asp\"&gt;Gallery&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&nbsp; ',   '&lt;/div&gt;&lt;hr /&gt;&lt;div id=\"footer\"&gt;&lt;P&gt;Powered by &lt;a   href=\"http://blog.betaparticle.com\" title=\"Powered by BP Blog 7.0\"&gt;BP   Blog 7.0&lt;/a&gt;\t\t | &lt;a href=\"rss.xml\"&gt;Feed   (RSS)&lt;/a&gt;&lt;/P&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- Gorgeous design by   Michael Heilemann - <A href="http://binarybonsai.com/kubrick/" rel="nofollow">http://binarybonsai.com/kubrick/</A> --&gt;\t\t&lt;/body&gt;&lt;/html&gt;', 'Kubrick');<BR>
+<BR>
+#<BR>
+# Table structure   for table tblPage<BR>
+#<BR>
+<BR>
+DROP TABLE IF EXISTS tblPage;<BR>
+CREATE TABLE   tblPage (<BR>
+&nbsp; &nbsp;PageName VARCHAR(50),<BR>
+&nbsp; &nbsp;PageTitle VARCHAR(255) NOT   NULL,<BR>
+&nbsp; &nbsp;PageHTML TEXT NOT NULL,<BR>
+&nbsp; &nbsp;PageDate DATETIME DEFAULT '0' NOT   NULL<BR>
+);<BR>
+<BR>
+#<BR>
+# Table data for table tblPage<BR>
+#<BR>
+<BR>
+INSERT INTO   tblPage (PageName, PageTitle, PageHTML, PageDate) VALUES ('about', 'About BP   Blog', '&lt;P&gt;bp blog is a blog software coded in ASP.&lt;/P&gt;&lt;P&gt;It   should work on any server with IIS 4.0+.&amp;nbsp; Use IE 5.0+ or Firefox as   your browser for updating   pages.&lt;/P&gt;&lt;P&gt;Download:&lt;BR&gt;6.0&lt;BR&gt;&lt;A   href=\"http://blog.betaparticle.com/uploads/blog_6.0.zip\"&gt;http://blog.betaparticle.com/uploads/blog_6.0.zip&lt;/A&gt;&lt;BR&gt;5.0b   (previous version)&lt;BR&gt;&lt;A   href=\"http://blog.betaparticle.com/uploads/blog_5.0b.zip\"&gt;http://blog.betaparticle.com/uploads/blog_5.0b.zip&lt;/A&gt;&lt;BR&gt;&amp;nbsp;&lt;BR&gt;Features:&lt;BR&gt;-   ASP 3.0&lt;BR&gt;- HTML Editor with image/file upload&lt;BR&gt;- Only one line   of code to change (the connection string to your Access database)!&lt;BR&gt;-   Simple Gallery&lt;/P&gt;&lt;P&gt;Requirements:&lt;BR&gt;- IIS 4.0+&lt;BR&gt;-   Read/write access on the server (FSO)&lt;BR&gt;- MSXML&lt;/P&gt;&lt;P&gt;&lt;A   href=\"readme.txt\"&gt;Changelog&lt;/A&gt;&lt;/P&gt;&lt;!-------&gt;&lt;TABLE   borderColor=#840300 cellSpacing=0 cellPadding=0 width=150 bgColor=#d70500   border=1&gt;&lt;FORM action=http://www.hotscripts.com/rate/31715.html   method=post&gt;&lt;TBODY&gt;&lt;TR&gt;&lt;TD&gt;&lt;TABLE cellSpacing=0   cellPadding=2 width=\"100%\" border=0&gt;&lt;TBODY&gt;&lt;TR align=middle   bgColor=#aa0400&gt;&lt;TD colSpan=2&gt;&lt;B&gt;&lt;FONT color=#ffffff&gt;Rate   Our Program &lt;INPUT type=hidden name=external&gt;   &lt;/FONT&gt;&lt;/B&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD   align=right&gt;&lt;INPUT type=radio name=rate&gt;&lt;/TD&gt;&lt;TD&gt;&lt;FONT   color=#ffffff&gt;Excellent!&lt;/FONT&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD   align=right&gt;&lt;INPUT type=radio name=rate&gt;&lt;/TD&gt;&lt;TD&gt;&lt;FONT   color=#ffffff&gt;Very Good&lt;/FONT&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD   align=right&gt;&lt;INPUT type=radio name=rate&gt;&lt;/TD&gt;&lt;TD&gt;&lt;FONT   color=#ffffff&gt;Good&lt;/FONT&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD   align=right&gt;&lt;INPUT type=radio name=rate&gt;&lt;/TD&gt;&lt;TD&gt;&lt;FONT   color=#ffffff&gt;Fair&lt;/FONT&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD   align=right&gt;&lt;INPUT type=radio name=rate&gt;&lt;/TD&gt;&lt;TD&gt;&lt;FONT   color=#ffffff&gt;Poor&lt;/FONT&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;TR   align=middle&gt;&lt;TD colSpan=2&gt;&lt;INPUT type=submit value=\"Submit Query\"   name=submit2&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TBODY&gt;&lt;/TABLE&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TBODY&gt;&lt;/FORM&gt;&lt;/TABLE&gt;&lt;BR&gt;&lt;!-------   End of HTML Code -------&gt;&lt;TABLE cellSpacing=0 cellPadding=1 width=\"100%\"   align=center bgColor=#000000 border=0&gt;&lt;TBODY&gt;&lt;TR&gt;&lt;TD   align=middle&gt;&lt;TABLE cellSpacing=0 cellPadding=3 bgColor=#eeeedd   border=0&gt;&lt;TBODY&gt;&lt;TR&gt;&lt;TD align=middle&gt;&lt;FONT   style=\"FONT-SIZE: 10pt; FONT-FAMILY: Arial\"&gt;&lt;B&gt;Rated:&lt;/B&gt; &lt;A   href=\"http://www.aspin.com/func/review?id=5981710\"&gt;&lt;IMG   src=\"http://ratings.aspin.com/getstars?id=5981710\" border=0&gt;&lt;/A&gt;   &lt;FONT style=\"FONT-SIZE: 8pt\"&gt;&lt;BR&gt;by &lt;A   href=\"http://www.aspin.com/\"&gt;Aspin.com&lt;/A&gt;   users&lt;BR&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;FORM   action=http://www.Aspin.com/func/review/write?id=5981710 method=post&gt;&lt;TD   align=middle&gt;&lt;FONT style=\"FONT-SIZE: 10pt; FONT-FAMILY: Arial\"&gt;What   do you think?&lt;/FONT&gt;&lt;BR&gt;&lt;SELECT name=VoteStars&gt;&lt;OPTION   selected&gt;5 Stars&lt;/OPTION&gt;&lt;OPTION&gt;4   Stars&lt;/OPTION&gt;&lt;OPTION&gt;3 Stars&lt;/OPTION&gt;&lt;OPTION&gt;2   Stars&lt;/OPTION&gt;&lt;OPTION&gt;1 Star&lt;/OPTION&gt;&lt;/SELECT&gt;&lt;INPUT   type=submit value=\"Submit Query\"&gt;   &lt;/TD&gt;&lt;/FORM&gt;&lt;/TR&gt;&lt;/TBODY&gt;&lt;/TABLE&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TBODY&gt;&lt;/TABLE&gt;',   '2004-01-09 09:01:19');<BR>
+INSERT INTO tblPage (PageName, PageTitle, PageHTML,   PageDate) VALUES ('thanks', 'Thank you for your comments!', '&lt;p&gt;Your   comments are subject to approval.&lt;/p&gt;', '2005-02-15 13:27:39');<BR>
+INSERT   INTO tblPage (PageName, PageTitle, PageHTML, PageDate) VALUES ('thankyou',   'Thank you for registering', '&lt;p&gt;You will be contacted via email when you   are approved.&amp;nbsp; Be sure and upated your profile when you log back in   after approval.&lt;/p&gt;', '2006-11-04 11:09:29');<BR>
+<p>The End!</p>
+</BODY>
+
+</HTML>
